@@ -1,14 +1,14 @@
-# covid-19
+# Portfolio Project Covid-19 March 2021
 
-# Documentation
+## Documentation
 
 You will be able to go through the files and locate the step number on each section to match this documentation. 
 
-## Step 1 
+### Step 1
 
 I downloaded the data from the following link: https://ourworldindata.org/covid-deaths as a CSV file.
 
-## Step 2
+### Step 2
 
 I filtered the data in the csv file to get the columns I desiered. I then created two csv files from this:
 
@@ -17,11 +17,11 @@ I filtered the data in the csv file to get the columns I desiered. I then create
 
 Each file contained the raw data.
 
-## Step 3
+### Step 3
 
 I created a data base in postgres calles "PortfolioProject" in postgres using the create database function.
 
-## Step 4 
+### Step 4
 
 Created the tables inside of the database
 
@@ -29,7 +29,7 @@ Created the tables inside of the database
 2. covid_vaccinations
 
 
-### Code
+#### Code
 
 ```
 --STEP 4
@@ -122,7 +122,7 @@ ALTER TABLE public."covid_vaccinations"
 
 ```
 
-## Step 5
+### Step 5
 
 I loaded the data into the each corresponding table. I had to be very careful when creating the tables as the columns needed to match my csv. I check spelling, type of data, and, total amount of columns.
 
@@ -130,11 +130,11 @@ I loaded the data into the each corresponding table. I had to be very careful wh
 
 ![importdeathscsv](Images/importing_data/impo_covid_vaccinations_csv.png)
 
-## Step 6
+### Step 6
 
 I verified the data was properly transfered to my postgres data base
 
-### Code
+#### Code
 
 ```
 --STEP 6
@@ -147,4 +147,4 @@ SELECT *
 FROM covid_vaccinations;
 ```
 
-## Step 7
+### Step 7
