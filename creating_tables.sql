@@ -1,6 +1,6 @@
+--STEP 4
+-- Creating the covid deaths table in data base
 
--- Creating the covid deaths table in data base
--- Creating the covid deaths table in data base
 CREATE TABLE public."covid_deaths"
 (
     iso_code "char",
@@ -36,6 +36,8 @@ WITH (
 
 ALTER TABLE public."covid_deaths"
     OWNER to postgres;
+
+--STEP 4
 -- Creating table for covid vaccinations
 CREATE TABLE public.covid_vaccinations
 (
