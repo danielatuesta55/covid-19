@@ -130,7 +130,7 @@ SELECT *, (total_daily_vaccinated/population)*100 AS total_population_vaccinated
 FROM percentage_population_vaccinated;
 
 -- STEP 21
--- Creating a view for later vizualization 
+-- Creating a view for later vizualization  
 CREATE VIEW percentage_population_vaccinated AS
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations, SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS total_daily_vaccinated  
 FROM covid_deaths dea
