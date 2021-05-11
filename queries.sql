@@ -84,3 +84,49 @@ SELECT SUM(new_Cases) AS total_cases, SUM(new_deaths) AS total_deaths , SUM(new_
 FROM covid_deaths
 WHERE continent IS NOT NULL
 ORDER BY 1,2;
+
+--STEP 17 
+-- Joining the two tabels togheter (deaths and vaccination)
+SELECT *
+FROM covid_deaths dea
+JOIN covid_vaccinations vac
+    ON dea.location = vac.location
+    AND dea.date = vac.date;
+ORDER BY 1,2,3
+-- STEP 18
+-- Looking at the total population vs vaccinations
+SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+FROM covid_deaths dea
+JOIN covid_vaccinations vac 
+    ON dea.location = vac.location
+    AND dea.date = vac.date
+WHERE dea.continent IS NOT NULL
+ORDER BY 2,3;
+
+--STEP 19 
+-- Looking daily increment in data totals for every location regarding vaccination 
+SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations, SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS total_daily
+FROM covid_deaths dea
+JOIN covid_vaccinations vac 
+    ON dea.location = vac.location
+    AND dea.date = vac.date
+WHERE dea.continent IS NOT NULL
+ORDER BY 2,3;
+
+--STEP 20 
+-- Creating a table with the previouse query to then get the total daily vaccinated population percent
+
+DROP TABLE IF EXISTS percentage_population_vaccinated
+
+CREATE TABLE percentage_population_vaccinated AS
+SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations, SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS total_daily_vaccinated  
+FROM covid_deaths dea
+JOIN covid_vaccinations vac 
+    ON dea.location = vac.location
+    AND dea.date = vac.date
+WHERE dea.continent IS NOT NULL;
+
+SELECT *, (total_daily_vaccinated/population)*100 AS total_population_vaccinated
+FROM percentage_population_vaccinated;
+
+
