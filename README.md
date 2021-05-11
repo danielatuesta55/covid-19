@@ -29,7 +29,7 @@ Created the tables inside of the database
 2. covid_vaccinations
 
 
-#### Code
+### Code
 
 ```
 --STEP 4
@@ -134,6 +134,8 @@ I loaded the data into the each corresponding table. I had to be very careful wh
 
 I verified the data was properly transfered to my postgres data base
 
+### Code
+
 ```
 --STEP 6
 --Checking the data was properly imported into postgres
@@ -144,3 +146,5 @@ FROM covid_deaths;
 SELECT * 
 FROM covid_vaccinations;
 ```
+
+## Step 7
