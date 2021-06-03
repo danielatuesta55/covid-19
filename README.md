@@ -37,7 +37,7 @@ Created the tables inside of the database
 
 CREATE TABLE public."covid_deaths"
 (
-    iso_code "char",
+    iso_code VARCHAR,
     continent character varying,
 	location VARCHAR, 
     date date,
