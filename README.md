@@ -148,3 +148,46 @@ FROM covid_vaccinations;
 ```
 
 ### Step 7
+I created the following queries to create new tables for the visualizations
+```
+-- Creating the tables to use in tableu
+SELECT SUM(new_cases) AS total_cases, SUM(cast(new_deaths AS INT)) AS total_deaths, SUM(CAST(new_deaths AS INT))/SUM(New_Cases)*100 AS DeathPercentage
+FROM covid_deaths
+--Where location like '%states%'
+WHERE continent IS NOT NULL
+--Group By date
+ORDER BY 1,2;
+
+SELECT location, SUM(CAST(new_deaths AS INT)) AS TotalDeathCount
+FROM covid_deaths
+--Where location like '%states%'
+WHERE continent IS NULL
+AND location NOT IN ('World', 'European Union', 'International')
+GROUP BY location
+ORDER BY TotalDeathCount desc;
+
+
+-- 3.
+
+SELECT Location, Population, MAX(total_cases) AS HighestInfectionCount,  MAX((total_cases/population))*100 AS PercentPopulationInfected
+FROM covid_deaths
+--Where location like '%states%'
+Group by Location, Population
+order by PercentPopulationInfected desc;
+
+
+-- 4.
+
+
+SELECT Location, Population,date, MAX(total_cases) AS HighestInfectionCount,  MAX((total_cases/population))*100 AS PercentPopulationInfected
+FROM covid_deaths
+--Where location like '%states%'
+GROUP BY Location, Population, date
+ORDER BY PercentPopulationInfected desc;
+```
+
+### Step 8
+
+After exploring the data on postgres I decided to copy the data into excel to be able to transfer into Tabluea. Once the data was transferred I started creating the different visualizations. Here is an image of the final dashboard.
+
+![dashboard](Images/dashboard/dashboard.png)

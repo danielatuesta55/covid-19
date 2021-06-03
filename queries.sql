@@ -142,3 +142,38 @@ WHERE dea.continent IS NOT NULL;
 SELECT *, (total_daily_vaccinated/population)*100 AS total_population_vaccinated
 FROM percentage_population_vaccinated;
 
+-- Step 22
+-- Creating the tables to use in tableu
+SELECT SUM(new_cases) AS total_cases, SUM(cast(new_deaths AS INT)) AS total_deaths, SUM(CAST(new_deaths AS INT))/SUM(New_Cases)*100 AS DeathPercentage
+FROM covid_deaths
+--Where location like '%states%'
+WHERE continent IS NOT NULL
+--Group By date
+ORDER BY 1,2;
+
+SELECT location, SUM(CAST(new_deaths AS INT)) AS TotalDeathCount
+FROM covid_deaths
+--Where location like '%states%'
+WHERE continent IS NULL
+AND location NOT IN ('World', 'European Union', 'International')
+GROUP BY location
+ORDER BY TotalDeathCount desc;
+
+
+-- 3.
+
+SELECT Location, Population, MAX(total_cases) AS HighestInfectionCount,  MAX((total_cases/population))*100 AS PercentPopulationInfected
+FROM covid_deaths
+--Where location like '%states%'
+Group by Location, Population
+order by PercentPopulationInfected desc;
+
+
+-- 4.
+
+
+SELECT Location, Population,date, MAX(total_cases) AS HighestInfectionCount,  MAX((total_cases/population))*100 AS PercentPopulationInfected
+FROM covid_deaths
+--Where location like '%states%'
+GROUP BY Location, Population, date
+ORDER BY PercentPopulationInfected desc;
